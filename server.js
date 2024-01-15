@@ -1,4 +1,6 @@
 import express from 'express';
+import { v4 as uuidv4 } from 'uuid';
+import Item from './item.js';
 
 const app = express();
 const port = 3000;
@@ -7,11 +9,10 @@ const port = 3000;
 app.use(express.json());
 
 // Example data (in-memory storage for demonstration purposes)
-let items = [
-  { id: 1, name: 'Item 1' },
-  { id: 2, name: 'Item 2' },
-  { id: 3, name: 'Item 3' },
-];
+const item1 = new Item('Item 1')
+const item2 = new Item('Item 2')
+const item3 = new Item('Item 3')
+let items = [item1, item2, item3];
 
 // Get all items
 app.get('/items', (req, res) => {
@@ -29,6 +30,18 @@ app.get('/items/:id', (req, res) => {
     res.status(404).json({ message: 'Item not found' });
   }
 });
+
+app.post('/items', (req, res) => {
+  const newItem = createRequest(req.body.name);
+  items.push(newItem)
+  res.status(201).json({message: `Created request ${newItem}!`});
+
+
+  function createRequest(name){
+    return new Item(name);
+  }
+
+})
 
 // Start the server
 app.listen(port, () => {
