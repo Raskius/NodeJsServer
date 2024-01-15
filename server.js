@@ -33,20 +33,32 @@ app.get('/items/:id', (req, res) => {
 
 app.post('/items', (req, res) => {
   const hasItem = Item.containsName(items, req.body)
+
   if (hasItem) {
-    res.status(400).json({ error: `There is already an item with name: \'${req.body.name}\'`})
+    res.status(400).json({ error: `There is already an item with name: \'${req.body.name}\'` })
     return;
   }
-  const newItem = createRequest(req.body.name);
+
+  const newItem = new Item(req.body.name);
   items.push(newItem)
   res.status(201).json({ message: `Created request ${newItem}!` });
 
+})
 
-  function createRequest(name) {
-    return new Item(name);
+app.delete('/items/:id', (req, res) => {
+  const itemIndex = items.findIndex(i => i.id == req.params.id);
+  
+  if (itemIndex == -1) {
+    res.status(400).json({ error: `Could not find an item with id: '${req.params.id}'` });
+    return;
   }
 
-})
+  items.splice(itemIndex, 1);
+  res.status(200).json({ message: `Item '${req.params.id}' successfully deleted.` });
+});
+
+
+
 
 // Start the server
 app.listen(port, () => {
