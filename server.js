@@ -32,12 +32,17 @@ app.get('/items/:id', (req, res) => {
 });
 
 app.post('/items', (req, res) => {
+  const hasItem = Item.containsName(items, req.body)
+  if (hasItem) {
+    res.status(400).json({ error: `There is already an item with name: \'${req.body.name}\'`})
+    return;
+  }
   const newItem = createRequest(req.body.name);
   items.push(newItem)
-  res.status(201).json({message: `Created request ${newItem}!`});
+  res.status(201).json({ message: `Created request ${newItem}!` });
 
 
-  function createRequest(name){
+  function createRequest(name) {
     return new Item(name);
   }
 

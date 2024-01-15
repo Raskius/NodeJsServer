@@ -9,4 +9,8 @@ export default class Item{
     toString(){
         return `ID: ${this.id}, Name: ${this.name}`
     }
+
+    static containsName(itemsArray, item){
+        return itemsArray.some(i => i.name === item.name)
+    }
 }
