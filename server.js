@@ -31,6 +31,7 @@ app.get('/items/:id', (req, res) => {
   }
 });
 
+// Create a new item
 app.post('/items', (req, res) => {
   const hasItem = Item.containsName(items, req.body)
 
@@ -42,9 +43,10 @@ app.post('/items', (req, res) => {
   const newItem = new Item(req.body.name);
   items.push(newItem)
   res.status(201).json({ message: `Created request ${newItem}!` });
-
 })
 
+
+// Delete the item given the ID
 app.delete('/items/:id', (req, res) => {
   const itemIndex = items.findIndex(i => i.id == req.params.id);
   
@@ -56,8 +58,6 @@ app.delete('/items/:id', (req, res) => {
   items.splice(itemIndex, 1);
   res.status(200).json({ message: `Item '${req.params.id}' successfully deleted.` });
 });
-
-
 
 
 // Start the server
