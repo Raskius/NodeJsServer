@@ -12,13 +12,13 @@ let items = [item1, item2, item3];
 
 
 // Get all items
-router.get('/items', (req, res) => {
+router.get('/', (req, res) => {
   res.json(items);
 });
 
 
 // Get a specific item by ID
-router.get('/items/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const itemId = req.params.id;
   const item = items.find((item) => item.id === itemId);
 
@@ -31,7 +31,7 @@ router.get('/items/:id', (req, res) => {
 
 
 // Create a new item
-router.post('/items', (req, res) => {
+router.post('/', (req, res) => {
   const hasItem = Item.containsName(items, req.body)
 
   if (hasItem) {
@@ -46,7 +46,7 @@ router.post('/items', (req, res) => {
 
 
 // Delete the item given the ID
-router.delete('/items/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const itemIndex = items.findIndex(i => i.id == req.params.id);
   
   if (itemIndex == -1) {

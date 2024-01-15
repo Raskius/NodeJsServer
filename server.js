@@ -8,7 +8,7 @@ const port = 3000;
 app.use(express.json());
 
 // Use the itemsController to handle item-related requests
-app.use('/', itemController);
+app.use('/items', itemController);
 
 // Start the server
 app.listen(port, () => {
