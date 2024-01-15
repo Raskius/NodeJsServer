@@ -46,6 +46,17 @@ h1 {
   background-color: #4c83c1e7; /* Darker hover color */
 }
 
+.item-list li {
+  position: relative; /* Added for positioning the delete icon */
+}
+
+.delete-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
 
 .add-item-form {
   display: flex;
