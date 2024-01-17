@@ -1,7 +1,9 @@
 /* styles.css */
+* {
+  font-family: 'Arial', sans-serif;
+}
 
 body {
-  font-family: 'Arial', sans-serif;
   background-color: #1a1a1a; /* Dark background color */
   color: #fff; /* Light text color */
   margin: 0;
@@ -23,30 +25,35 @@ h1 {
   text-align: center;
 }
 
-.item-section {
+textarea {
+  min-height: 100px;
+  resize: vertical; 
+}
+
+.command-section {
   margin-top: 20px;
 }
-.add-item-section {
+.add-command-section {
   margin-top: 60px;
 }
 
-.item-list {
+.command-list {
   list-style: none;
   padding: 0;
 }
 
-.item-list li {
-  background-color: #4c82c191; /* Darker list item background color */
+.command-list li {
+  background-color: #4c82c191; /* Darker list command background color */
   margin-bottom: 8px;
   padding: 10px;
   border-radius: 4px;
 }
 
-.item-list li:hover {
+.command-list li:hover {
   background-color: #4c83c1e7; /* Darker hover color */
 }
 
-.item-list li {
+.command-list li {
   position: relative; /* Added for positioning the delete icon */
 }
 
@@ -58,12 +65,12 @@ h1 {
   cursor: pointer;
 }
 
-.add-item-form {
+.add-command-form {
   display: flex;
   flex-direction: column;
 }
 
-.item-input {
+.command-input {
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -75,18 +82,18 @@ h1 {
 }
 
 .label,
-.item-input,
-.add-item-btn {
+.command-input,
+.add-command-btn {
   margin-bottom: 10px;
 }
 
-.item-input,
-.add-item-btn {
+.command-input,
+.add-command-btn {
   padding: 10px;
   font-size: 14px;
 }
 
-.add-item-btn {
+.add-command-btn {
   background-color: #007bff; /* Darker button color */
   color: #fff;
   border: none;
@@ -94,6 +101,6 @@ h1 {
   cursor: pointer;
 }
 
-.add-item-btn:hover {
+.add-command-btn:hover {
   background-color: #0056b3; /* Darker hover color */
 }
