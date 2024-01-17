@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 // Example data (in-memory storage for demonstration purposes)
-const command1 = new Command('ls', 'List information about the FILEs')
+const command1 = new Command('ls', 'List information about the FILEs', [], [])
 const command2 = new Command('cd', 'Change the shell working directory')
 const command3 = new Command('grep', 'Search for PATTERN in each FILE or standard input')
 let commands = [command1, command2, command3];
@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
     return;
   }
 
-  const newCommand = new Command(req.body.name);
+  const newCommand = new Command(req.body.name, req.body.description, req.body.examples);
   commands.push(newCommand)
   res.status(201).json({ message: `Created request '${newCommand}'` });
 })

@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     addCommandForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         const commandName = document.getElementById('commandName').value;
-        await addCommand(commandName);
+        const commandDescription = document.getElementById('commandDescription').value;
+        const commandExamples = document.getElementById('commandExamples').value;
+        await addCommand(commandName, commandDescription, commandExamples);
     });
 
     // Delegate click event handling to the commandsList for delete icons
@@ -34,7 +36,7 @@ async function fetchCommands() {
         commands.forEach(command => {
             const listCommand = document.createElement('li');
             listCommand.setAttribute('data-command-id', command.id);
-            listCommand.textContent = command.name;
+            listCommand.textContent = command.name + "\n" + command.description + "\n" + command.examples;
             commandsList.appendChild(listCommand);
         });
     } catch (error) {
@@ -43,14 +45,14 @@ async function fetchCommands() {
 }
 
 // Add a new command to the server and update the UI
-async function addCommand(name) {
+async function addCommand(name, description, examples) {
     try {
         const response = await fetch('/commands', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name }),
+            body: JSON.stringify({ name, description, examples }),
         });
 
         // Clone the response before reading the body
