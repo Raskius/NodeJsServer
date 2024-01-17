@@ -1,3 +1,6 @@
+import CustomError from "./error.js";
+
+
 document.addEventListener('DOMContentLoaded', async () => {
     // Fetch and display items when the page loads
     await fetchItems();
@@ -50,13 +53,23 @@ async function addItem(name) {
             body: JSON.stringify({ name }),
         });
 
+        // Clone the response before reading the body
+        const clonedResponse = response.clone();
+
         if (!response.ok) {
-            throw new Error(`Error adding item: ${response.status} ${response.statusText}`);
+            const errorText = await clonedResponse.text();
+            // console.log(errorText);
+            throw new CustomError(`Error adding item: ${response.status} ${response.statusText}\n${errorText}`, response.status);
         }
+        
+        const responseBody = await response.text(); // or response.json() if the body is JSON
+        console.log('Response body:', responseBody);
 
         await fetchItems(); // Refresh the list after adding a new item
     } catch (error) {
-        console.error('Error adding item:', error);
+        if(error instanceof CustomError){
+            console.error(error);
+        }
     }
 }
 
@@ -76,3 +89,23 @@ async function deleteItem(itemId) {
         console.error('Error deleting item:', error);
     }
 }
+
+// # Add multiple in console.log #
+//
+// for(let i = 0; i < 50; i++){
+// 	setTimeout(function(){
+// 		document.getElementById("itemName").value = "Text: " + i;
+// 		document.querySelector("button").click();
+// 	}, 100 * i)
+// }
+
+// # Delete all #
+//
+// const itemsList = document.getElementById('itemsList');
+// const liList = itemsList.getElementsByTagName('li');
+
+// for(let i = liList.length - 1; i >= 0; i--){
+// 	setTimeout(function(){
+// 		liList[i].click()
+// 	}, 100 * (liList.length - i))
+// }

@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
 
   const newItem = new Item(req.body.name);
   items.push(newItem)
-  res.status(201).json({ message: `Created request ${newItem}!` });
+  res.status(201).json({ message: `Created request '${newItem}'` });
 })
 
 
