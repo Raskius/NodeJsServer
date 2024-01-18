@@ -15,7 +15,7 @@ export function importCommands(){
         const loadedCommands = Command.deserializeArray(jsonString);
     
         // Now 'loadedCommands' is an array containing instances of the Command class
-        console.log(loadedCommands);
+        // console.log(loadedCommands);
         return loadedCommands;
     } catch (error) {
         console.error(`Error reading or parsing ${fileName}: ${error.message}`);
