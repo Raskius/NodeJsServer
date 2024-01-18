@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
 export default class Command{
-    constructor(name, description = "", examples = [], tags=[]){
-        this.id = uuidv4();
+    constructor(id = uuidv4(), name, description = "", examples = [], tags=[]){
+        this.id = id;
         this.name = name;
         this.description = description;
         this.examples = examples; // TODO Change this later to a map
@@ -15,9 +15,12 @@ export default class Command{
 
     // Exclude ID when exporting
     toJSON() {
-        const { id, ...rest } = this;
-        return rest;
+        return this;
     }
+    // toJSON() {
+    //     const { id, ...rest } = this;
+    //     return rest;
+    // }
     
     static serializeArray(commandsArray) {
         return commandsArray.map(command => command.toJSON());
@@ -25,7 +28,7 @@ export default class Command{
 
     static deserializeArray(jsonString) {
         const jsonArray = JSON.parse(jsonString);
-        return jsonArray.map(obj => new Command(obj.name, obj.description, obj.examples, obj.tags));
+        return jsonArray.map(obj => new Command(obj.id, obj.name, obj.description, obj.examples, obj.tags));
     }
 
     static containsCommand(commandsArray, command){

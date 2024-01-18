@@ -17,10 +17,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const commandsList = document.getElementById('commandsList');
     commandsList.addEventListener('click', async (event) => {
-        // if (event.target.classList.contains('delete-icon')) {
-            const commandId = event.target.dataset.commandId;
+        const clickedLi = event.target.closest('li');
+
+        if (clickedLi) {
+            const commandId = clickedLi.dataset.commandId;
+            // Your logic here, for example, calling a function with the commandId
             await deleteCommand(commandId);
-        // }
+        }
     });
 
 });
