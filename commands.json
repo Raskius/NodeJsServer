@@ -24,7 +24,7 @@
     "id": "a215a294-9878-4045-ac62-40d71702245a",
     "name": "rm",
     "description": "Remove (unlink) the FILE(s).",
-    "examples": [],
+    "examples": "",
     "tags": []
   },
   {

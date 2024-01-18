@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     // Handle form submission to add a new command
-    const editCommandForm = document.getElementById('editCommandForm');
-    editCommandForm.addEventListener('submit', async (event) => {
+    const editCommandForm = document.getElementById('editCommandSubmit');
+    editCommandForm.addEventListener('click', async (event) => {
         event.preventDefault();
+        // Check which button was clicked based on its id
         const commandId = document.getElementById('commandIdEdit').value;
         const commandName = document.getElementById('commandNameEdit').value;
         const commandDescription = document.getElementById('commandDescriptionEdit').value;
@@ -26,9 +27,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         await editCommand(commandId, commandName, commandDescription, commandExamples);
     });
 
+    // Handle form submission to add a new command
+    const closeCommandForm = document.getElementById('closeEditCommand');
+    closeCommandForm.addEventListener('click', async (event) => {
+        event.preventDefault();
+        // The "Close" button was clicked
+        let addElement = document.getElementById("addCommand")
+        addElement.classList.remove('hide'); // Show section
+        let editElement = document.getElementById("editCommand")
+        editElement.classList.add('hide'); // Show section
+    });
+
 });
 
-function addOnDeleteCommandHandler(){
+function addOnDeleteCommandHandler() {
     const deleteIcons = document.querySelectorAll('.delete-icon');
     deleteIcons.forEach(deleteIcon => {
         deleteIcon.addEventListener('click', async (event) => {
@@ -43,7 +55,7 @@ function addOnDeleteCommandHandler(){
     })
 }
 
-async function addOnEditCommandHandler(){
+async function addOnEditCommandHandler() {
     const editIcons = document.querySelectorAll('.edit-icon');
     editIcons.forEach(editIcon => {
         editIcon.addEventListener('click', async (event) => {
@@ -53,7 +65,7 @@ async function addOnEditCommandHandler(){
                 const commandId = clickedLi.dataset.commandId;
                 // alert("Editting command: " + commandId)
                 let command = await getCommand(commandId);
-                
+
                 let addElement = document.getElementById("addCommand")
                 addElement.classList.add('hide'); // Show section
                 let editElement = document.getElementById("editCommand")
@@ -148,14 +160,14 @@ async function addCommand(name, description, examples) {
             const errorText = await clonedResponse.text();
             throw new CustomError(`Error adding command: ${response.status} ${response.statusText}\n${errorText}`, response.status, errorText);
         }
-        
+
         const responseBody = await response.text(); // or response.json() if the body is JSON
         console.log('Response body:', responseBody);
 
         await fetchCommands(); // Refresh the list after adding a new command
         showSnackbar(JSON.parse(responseBody).message, false);
     } catch (error) {
-        if(error instanceof CustomError){
+        if (error instanceof CustomError) {
             console.error(error);
             showSnackbar(JSON.parse(error.errorText).error, true);
         }
@@ -164,7 +176,6 @@ async function addCommand(name, description, examples) {
 // Add a new command to the server and update the UI
 async function editCommand(id, name, description, examples) {
     try {
-        console.log("SLSLS")
         const response = await fetch(`/commands/${id}`, {
             method: 'PUT',
             headers: {
@@ -181,14 +192,14 @@ async function editCommand(id, name, description, examples) {
             const errorText = await clonedResponse.text();
             throw new CustomError(`Error replacing command: ${response.status} ${response.statusText}\n${errorText}`, response.status, errorText);
         }
-        
+
         const responseBody = await response.text(); // or response.json() if the body is JSON
         console.log('Response body:', responseBody);
 
         await fetchCommands(); // Refresh the list after adding a new command
         showSnackbar(JSON.parse(responseBody).message, false);
     } catch (error) {
-        if(error instanceof CustomError){
+        if (error instanceof CustomError) {
             console.error(error);
             showSnackbar(JSON.parse(error.errorText).error, true);
         }
