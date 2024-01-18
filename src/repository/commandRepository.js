@@ -26,6 +26,17 @@ export default class CommandRepository {
         this.saveCommands();
         return newCommand;
     }
+    edit(id, name, description, examples, tags) {
+        const existingCommandIndex = this.commands.findIndex(command => command.getId() === id);
+        // Command with the given ID already exists, update it
+        let command = this.commands[existingCommandIndex];
+        command.setName(name);
+        command.setDescription(description);
+        command.setExamples(examples);
+        command.setTags(tags);
+        this.saveCommands();
+        return command;
+    }
     deleteById(commandId) {
         this.commands = this.commands.filter(command => command.getId() !== commandId);
         this.saveCommands();

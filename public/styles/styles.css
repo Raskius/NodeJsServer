@@ -46,7 +46,7 @@ h1 {
 }
 
 textarea {
-  height: 100px;
+  min-height: 100px;
   resize: vertical; 
 }
 
@@ -55,7 +55,8 @@ textarea {
 }
 
 
-.add-command-section {
+.add-command-section,
+.edit-command-section {
   margin-top: 60px;
 }
 
@@ -69,21 +70,21 @@ textarea {
 }
 
 .command-list li {
-  background-color: #4c82c191; /* Darker list command background color */
+  background-color: #475566af; /* Darker list command background color */
   margin-bottom: 8px;
   padding: 10px;
   border-radius: 4px;
 }
 
 .command-list li:hover {
-  background-color: #4c83c1e7; /* Darker hover color */
+  background-color: #426388; /* Darker hover color */
 }
 
 .command-list li {
   position: relative; /* Added for positioning the delete icon */
 }
 
-.add-command-form {
+.edit-command-form, .add-command-form {
   display: flex;
   flex-direction: column;
 }
@@ -99,28 +100,37 @@ textarea {
   background-color: #444; /* Darker input background color */
 }
 
+.command-input[disabled] {
+  color: dimgrey;
+  background-color: #28292a;
+}
+
 .label,
 .command-input,
+.edit-command-btn,
 .add-command-btn {
   margin-bottom: 10px;
 }
 
 .command-input,
-.add-command-btn {
+.add-command-btn,
+.edit-command-btn {
   padding: 10px;
   font-size: 14px;
 }
 
-.add-command-btn {
-  background-color: #007bff; /* Darker button color */
+.add-command-btn,
+.edit-command-btn {
+  background-color: #507aa7; /* Darker button color */
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.add-command-btn:hover {
-  background-color: #0056b3; /* Darker hover color */
+.edit-command-btn:hover,
+ .add-command-btn:hover {
+  background-color: #2c67a7; /* Darker hover color */
 }
 
 /* Add these styles to combine name and description on the same line */
@@ -171,7 +181,7 @@ textarea {
   display: none;
 }
 
-.delete-icon {
+.delete-icon, .edit-icon {
   align-items: center;
   justify-content: center;
   width: 30px;
@@ -179,9 +189,10 @@ textarea {
   border-radius: 50%; 
   cursor: pointer; 
   float: right;
+  padding-right: 10px;
 }
 
-.delete-icon i, .delete-icon img {
+.edit-icon i, .edit-icon img, .delete-icon i, .delete-icon img {
   color: #fff; 
   font-size: 24px; /* Increase the font size */
 }

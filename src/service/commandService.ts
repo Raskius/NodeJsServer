@@ -1,5 +1,6 @@
 import CommandRepository from "../repository/commandRepository";
 import Command from "../model/command.js";
+
 export default class CommandService{
 
     private commandRepository;
@@ -24,8 +25,12 @@ export default class CommandService{
         return this.commandRepository.deleteById(id);
     }
 
-    save(name: string, description: string, examples: string[], tags: string[]){
+    save( name: string, description: string, examples: string[], tags: string[]){
         return this.commandRepository.save(name, description, examples, tags)
+    }
+
+    edit(commandId: string, name: string, description: string, examples: string[], tags: string[]){
+        return this.commandRepository.edit(commandId, name, description, examples, tags)
     }
 
 

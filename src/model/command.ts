@@ -26,18 +26,34 @@ export default class Command{
         return this.name;
     }
 
+    setName(name: string) {
+        this.name = name;
+    }
+
     getDescription(): string{
         return this.description;
+    }
+
+    setDescription(description: string) {
+        this.description = description;
     }
 
     getExamples(): string[] {
         return this.examples;
     }
 
+    setExamples(examples: string[]) {
+        this.examples = examples;
+    }
+
     getTags(): string[] {
         return this.tags;
     }
 
+    setTags(tags: string[]) {
+        this.tags = tags;
+        
+    }
     toString(){
         return `ID: ${this.id}\nName:\n ${this.name}\nDescription:\n ${this.description} \nExamples:\n ${this.examples}`
     }

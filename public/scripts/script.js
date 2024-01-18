@@ -15,6 +15,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         await addCommand(commandName, commandDescription, commandExamples);
     });
 
+    // Handle form submission to add a new command
+    const editCommandForm = document.getElementById('editCommandForm');
+    editCommandForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const commandId = document.getElementById('commandIdEdit').value;
+        const commandName = document.getElementById('commandNameEdit').value;
+        const commandDescription = document.getElementById('commandDescriptionEdit').value;
+        const commandExamples = document.getElementById('commandExamplesEdit').value;
+        await editCommand(commandId, commandName, commandDescription, commandExamples);
+    });
+
 });
 
 function addOnDeleteCommandHandler(){
@@ -30,7 +41,31 @@ function addOnDeleteCommandHandler(){
             }
         });
     })
+}
 
+async function addOnEditCommandHandler(){
+    const editIcons = document.querySelectorAll('.edit-icon');
+    editIcons.forEach(editIcon => {
+        editIcon.addEventListener('click', async (event) => {
+            const clickedLi = event.target.closest('li');
+
+            if (clickedLi) {
+                const commandId = clickedLi.dataset.commandId;
+                // alert("Editting command: " + commandId)
+                let command = await getCommand(commandId);
+                
+                let addElement = document.getElementById("addCommand")
+                addElement.classList.add('hide'); // Show section
+                let editElement = document.getElementById("editCommand")
+                editElement.classList.remove('hide'); // Show section
+
+                document.getElementById("commandIdEdit").value = commandId
+                document.getElementById("commandNameEdit").value = command.name
+                document.getElementById("commandDescriptionEdit").value = command.description
+                document.getElementById("commandExamplesEdit").value = command.examples
+            }
+        });
+    })
 }
 
 // Fetch commands from the server and display them
@@ -59,6 +94,11 @@ async function fetchCommands() {
             descriptionElement.classList.add('command-description');
             descriptionElement.textContent = command.description;
 
+            const editElement = document.createElement('div')
+            editElement.classList.add('edit-icon')
+            editElement.title = `Edit '${command.name}' command`
+            editElement.innerHTML = `<i class="fa fa-pencil"></i>`
+
             const deleteElement = document.createElement('div')
             deleteElement.classList.add('delete-icon')
             deleteElement.title = `Delete '${command.name}' command`
@@ -69,6 +109,7 @@ async function fetchCommands() {
             commandDetails.innerHTML += ' - '; // Add a separator
             commandDetails.appendChild(descriptionElement);
             commandDetails.appendChild(deleteElement);
+            commandDetails.appendChild(editElement);
 
             // Append the command details container to the list item
             listCommand.appendChild(commandDetails);
@@ -79,6 +120,8 @@ async function fetchCommands() {
 
         // Create click handler for delete icons
         addOnDeleteCommandHandler();
+        // Create click handler for delete icons
+        addOnEditCommandHandler();
 
     } catch (error) {
         console.error('Error fetching commands:', error);
@@ -118,6 +161,39 @@ async function addCommand(name, description, examples) {
         }
     }
 }
+// Add a new command to the server and update the UI
+async function editCommand(id, name, description, examples) {
+    try {
+        console.log("SLSLS")
+        const response = await fetch(`/commands/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, description, examples }),
+        });
+
+
+        // Clone the response before reading the body
+        const clonedResponse = response.clone();
+
+        if (!response.ok) {
+            const errorText = await clonedResponse.text();
+            throw new CustomError(`Error replacing command: ${response.status} ${response.statusText}\n${errorText}`, response.status, errorText);
+        }
+        
+        const responseBody = await response.text(); // or response.json() if the body is JSON
+        console.log('Response body:', responseBody);
+
+        await fetchCommands(); // Refresh the list after adding a new command
+        showSnackbar(JSON.parse(responseBody).message, false);
+    } catch (error) {
+        if(error instanceof CustomError){
+            console.error(error);
+            showSnackbar(JSON.parse(error.errorText).error, true);
+        }
+    }
+}
 
 // Delete an command from the server and update the UI
 async function deleteCommand(commandId) {
@@ -130,13 +206,34 @@ async function deleteCommand(commandId) {
             throw new Error(`Error deleting command: ${response.status} ${response.statusText}`);
         }
         const responseBody = await response.text(); // or response.json() if the body is JSON
-
         await fetchCommands(); // Refresh the list after deleting an command
-        
+
         showSnackbar(JSON.parse(responseBody).message, false);
+
     } catch (error) {
-        console.error('Error deleting command:', error);
-        console.log(error);
+        console.error(error);
+        showSnackbar(JSON.parse(error.errorText).error, false);
+    }
+}
+
+// Delete an command from the server and update the UI
+async function getCommand(commandId) {
+    try {
+        const response = await fetch(`/commands/${commandId}`, {
+            method: 'GET',
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error getting command: ${response.status} ${response.statusText}`);
+        }
+        const responseBody = await response.text(); // or response.json() if the body is JSON
+
+        let command = JSON.parse(responseBody);
+        showSnackbar(`Editing command '${command.name}'`, false);
+        return command;
+
+    } catch (error) {
+        console.error(error);
         showSnackbar(JSON.parse(error.errorText).error, false);
     }
 }

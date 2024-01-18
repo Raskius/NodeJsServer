@@ -20,12 +20,12 @@ export default class CommandController {
     createCommand(req, res) {
         const { name, description, examples } = req.body;
         const command = this.commandService.findByName(name);
-        if (command != undefined) {
+        if (command !== undefined) {
             res.status(400).json({ error: `A command with that name already exists: '${name}'` });
             return;
         }
         const newCommand = this.commandService.save(name, description, examples, []);
-        res.status(201).json({ message: `Created request '${newCommand}'` });
+        res.status(201).json({ message: `Command '${newCommand.getName()}' created successfully` });
     }
     deleteCommand(req, res) {
         const command = this.commandService.findById(req.params.id);
@@ -35,5 +35,16 @@ export default class CommandController {
         }
         this.commandService.deleteById(command.getId());
         res.status(200).json({ message: `Command '${command.getName()}' successfully deleted.` });
+    }
+    editCommand(req, res) {
+        let commandId = req.params.id;
+        const command = this.commandService.findById(commandId);
+        const { name, description, examples } = req.body;
+        if (command === undefined) {
+            res.status(400).json({ error: `A command with that name does not exist: '${name}'` });
+            return;
+        }
+        const newCommand = this.commandService.edit(commandId, name, description, examples, []);
+        res.status(201).json({ message: `Command '${newCommand.getName()}' updated successfully` });
     }
 }

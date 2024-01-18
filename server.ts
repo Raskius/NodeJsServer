@@ -19,6 +19,7 @@ app.get('/commands', (req, res) => commandController.getAllCommands(req, res));
 app.get('/commands/:id', (req, res) => commandController.getCommandById(req, res));
 app.post('/commands', (req, res) => commandController.createCommand(req, res));
 app.delete('/commands/:id', (req, res) => commandController.deleteCommand(req, res));
+app.put('/commands/:id', (req, res) => commandController.editCommand(req, res));
 
 // // Use the commandsController to handle command-related requests
 // app.use('/commands', commandController);

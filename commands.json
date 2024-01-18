@@ -10,7 +10,7 @@
     "id": "db2acd86-62cf-411c-be47-9e9031abde31",
     "name": "cd",
     "description": "Change the shell working directory",
-    "examples": [],
+    "examples": "",
     "tags": []
   },
   {

@@ -13,14 +13,26 @@ export default class Command {
     getName() {
         return this.name;
     }
+    setName(name) {
+        this.name = name;
+    }
     getDescription() {
         return this.description;
+    }
+    setDescription(description) {
+        this.description = description;
     }
     getExamples() {
         return this.examples;
     }
+    setExamples(examples) {
+        this.examples = examples;
+    }
     getTags() {
         return this.tags;
+    }
+    setTags(tags) {
+        this.tags = tags;
     }
     toString() {
         return `ID: ${this.id}\nName:\n ${this.name}\nDescription:\n ${this.description} \nExamples:\n ${this.examples}`;

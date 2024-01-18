@@ -17,4 +17,7 @@ export default class CommandService {
     save(name, description, examples, tags) {
         return this.commandRepository.save(name, description, examples, tags);
     }
+    edit(commandId, name, description, examples, tags) {
+        return this.commandRepository.edit(commandId, name, description, examples, tags);
+    }
 }
