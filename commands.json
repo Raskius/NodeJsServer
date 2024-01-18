@@ -28,5 +28,11 @@
     "description": "Concatenate FILE(s) to standard output.",
     "examples": [],
     "tags": []
+  },
+  {
+    "name": "gpg",
+    "description": "Sign, check, encrypt or decrypt",
+    "examples": [],
+    "tags": []
   }
 ]
