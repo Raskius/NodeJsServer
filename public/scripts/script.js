@@ -89,7 +89,7 @@ async function addCommand(name, description, examples) {
         if (!response.ok) {
             const errorText = await clonedResponse.text();
             // console.log(errorText);
-            throw new CustomError(`Error adding command: ${response.status} ${response.statusText}\n${errorText}`, response.status);
+            throw new CustomError(`Error adding command: ${response.status} ${response.statusText}\n${errorText}`, response.status, errorText);
         }
         
         const responseBody = await response.text(); // or response.json() if the body is JSON
@@ -99,6 +99,8 @@ async function addCommand(name, description, examples) {
     } catch (error) {
         if(error instanceof CustomError){
             console.error(error);
+            console.log(error);
+            showErrorSnackbar(JSON.parse(error.errorText).error);
         }
     }
 }
@@ -117,6 +119,8 @@ async function deleteCommand(commandId) {
         await fetchCommands(); // Refresh the list after deleting an command
     } catch (error) {
         console.error('Error deleting command:', error);
+        console.log(error);
+        showErrorSnackbar(JSON.parse(error.errorText).error);
     }
 }
 
@@ -139,3 +143,14 @@ async function deleteCommand(commandId) {
 // 		liList[i].click()
 // 	}, 100 * (liList.length - i))
 // }
+
+
+function showErrorSnackbar(text) {
+    const snackbar = document.getElementById('snackbar');
+    snackbar.innerText = text;
+    snackbar.classList.add('show');
+
+    setTimeout(() => {
+        snackbar.classList.remove('show');
+    }, 3000); // Hide after 3 seconds (adjust as needed)
+}
