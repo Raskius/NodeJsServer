@@ -61,14 +61,6 @@ textarea {
   position: relative; /* Added for positioning the delete icon */
 }
 
-.delete-icon {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
-
 .add-command-form {
   display: flex;
   flex-direction: column;
@@ -149,4 +141,19 @@ textarea {
 
 .hide {
   display: none;
+}
+
+.delete-icon {
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; 
+  cursor: pointer; 
+  float: right;
+}
+
+.delete-icon i, .delete-icon img {
+  color: #fff; 
+  font-size: 24px; /* Increase the font size */
 }

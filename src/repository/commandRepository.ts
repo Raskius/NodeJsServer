@@ -9,15 +9,22 @@ export default class CommandRepository {
     this.commands = importCommands();
   }
 
+  private updateCommands(){
+    this.commands = importCommands();
+  }
+
   findAll(): Command[] {
+    this.updateCommands();
     return this.commands;
   }
 
   findByName(name: string): Command | undefined {
+    this.updateCommands();
     return this.commands.find(c => c.getName() === name);
   }
 
   findById(id: string): Command | undefined {
+    this.updateCommands();
     return this.commands.find(c => c.getId() === id);
   }
 

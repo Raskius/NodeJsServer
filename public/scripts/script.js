@@ -15,18 +15,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         await addCommand(commandName, commandDescription, commandExamples);
     });
 
-    const commandsList = document.getElementById('commandsList');
-    commandsList.addEventListener('click', async (event) => {
-        const clickedLi = event.target.closest('li');
 
-        if (clickedLi) {
-            const commandId = clickedLi.dataset.commandId;
-            // Your logic here, for example, calling a function with the commandId
-            await deleteCommand(commandId);
-        }
-    });
+    // addOnDeleteCommandHandler();
 
 });
+
+function addOnDeleteCommandHandler(){
+    const deleteIcons = document.querySelectorAll('.delete-icon');
+    deleteIcons.forEach(deleteIcon => {
+        deleteIcon.addEventListener('click', async (event) => {
+            const clickedLi = event.target.closest('li');
+
+            if (clickedLi) {
+                const commandId = clickedLi.dataset.commandId;
+                // Your logic here, for example, calling a function with the commandId
+                alert(commandId)
+                await deleteCommand(commandId);
+            }
+        });
+    })
+
+}
 
 // Fetch commands from the server and display them
 async function fetchCommands() {
@@ -54,10 +63,15 @@ async function fetchCommands() {
             descriptionElement.classList.add('command-description');
             descriptionElement.textContent = command.description;
 
+            const deleteElement = document.createElement('div')
+            deleteElement.classList.add('delete-icon')
+            deleteElement.innerHTML = `<i class="fa fa-trash" aria-hidden="true"></i>`
+
             // Append elements to the command details container
             commandDetails.appendChild(nameElement);
             commandDetails.innerHTML += ' - '; // Add a separator
             commandDetails.appendChild(descriptionElement);
+            commandDetails.appendChild(deleteElement);
 
             // Append the command details container to the list item
             listCommand.appendChild(commandDetails);
@@ -65,6 +79,10 @@ async function fetchCommands() {
             // Append the list item to the commands list
             commandsList.appendChild(listCommand);
         });
+
+
+        addOnDeleteCommandHandler();
+
     } catch (error) {
         console.error('Error fetching commands:', error);
     }

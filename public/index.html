@@ -5,20 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Command Management App</title>
+    <link rel="stylesheet" type="text/css" href="./styles/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="icon" href="../images/linux-icon.png" type="image/png">
     <script type="module" defer src="scripts/script.js"></script>
 </head>
-
 <body>
     <div class="container">
         <h1>Command Management App</h1>
 
+        <!-- Display all commands in list -->
         <section class="command-section">
             <h2>Commands</h2>
             <ul id="commandsList" class="command-list"></ul>
         </section>
+        
 
+        <!-- Add commands section -->
         <section class="add-command-section">
             <h2>Create New Command</h2>
             <form id="addCommandForm" class="add-command-form">

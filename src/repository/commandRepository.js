@@ -5,13 +5,19 @@ export default class CommandRepository {
     constructor() {
         this.commands = importCommands();
     }
+    updateCommands() {
+        this.commands = importCommands();
+    }
     findAll() {
+        this.updateCommands();
         return this.commands;
     }
     findByName(name) {
+        this.updateCommands();
         return this.commands.find(c => c.getName() === name);
     }
     findById(id) {
+        this.updateCommands();
         return this.commands.find(c => c.getId() === id);
     }
     save(name, description, examples, tags) {
