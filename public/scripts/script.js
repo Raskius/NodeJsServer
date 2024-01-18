@@ -249,34 +249,18 @@ async function getCommand(commandId) {
     }
 }
 
-// # Add multiple in console.log #
-//
-// for(let i = 0; i < 50; i++){
-// 	setTimeout(function(){
-// 		document.getElementById("commandName").value = "Text: " + i;
-// 		document.querySelector("button").click();
-// 	}, 100 * i)
-// }
-
-// # Delete all #
-//
-// const commandsList = document.getElementById('commandsList');
-// const liList = commandsList.getElementsByTagName('li');
-
-// for(let i = liList.length - 1; i >= 0; i--){
-// 	setTimeout(function(){
-// 		liList[i].click()
-// 	}, 100 * (liList.length - i))
-// }
-
-
+// snackbar handling
+let snackbarTimeout = -1;
 function showSnackbar(text, isError) {
+    clearTimeout(snackbarTimeout)
     const snackbar = document.getElementById('snackbar');
     snackbar.innerText = text;
+    snackbar.classList.remove('success');
+    snackbar.classList.remove('error');
     snackbar.classList.add('show');
     snackbar.classList.add(isError ? 'error' : 'success');
 
-    setTimeout(() => {
+    snackbarTimeout = setTimeout(() => {
         snackbar.classList.remove('show');
     }, 3000); // Hide after 3 seconds (adjust as needed)
 }

@@ -40,5 +40,12 @@
     "description": "Sign, check, encrypt or decrypt",
     "examples": [],
     "tags": []
+  },
+  {
+    "id": "b4590616-6b75-4726-b923-23b185ec7bd3",
+    "name": "chmod",
+    "description": "Change the mode of each FILE to MODE.",
+    "examples": "",
+    "tags": []
   }
 ]
