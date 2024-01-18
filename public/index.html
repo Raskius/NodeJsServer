@@ -4,28 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item Management App</title>
+    <title>Command Management App</title>
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="icon" href="../images/linux-icon.png" type="image/png">
     <script type="module" defer src="scripts/script.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <h1>Item Management App</h1>
+        <h1>Command Management App</h1>
 
-        <section class="item-section">
-            <h2>Items</h2>
-            <ul id="itemsList" class="item-list"></ul>
+        <section class="command-section">
+            <h2>Commands</h2>
+            <ul id="commandsList" class="command-list"></ul>
         </section>
 
-        <section class="add-item-section">
-            <h2>Create New Item</h2>
-            <form id="addItemForm" class="add-item-form">
-                <input type="text" id="itemName" class="item-input" placeholder="Enter Item Name" required>
-                <button type="submit" class="add-item-btn">Add Item</button>
+        <section class="add-command-section">
+            <h2>Create New Command</h2>
+            <form id="addCommandForm" class="add-command-form">
+                <input type="text" id="commandName" class="command-input" placeholder="Enter Command Name" required>
+                <textarea id="commandDescription" class="command-input" placeholder="Enter Command Description" required></textarea>
+                <textarea id="commandExamples" class="command-input" placeholder="Enter Command Examples"></textarea>
+                <button type="submit" class="add-command-btn">Add Command</button>
             </form>
         </section>
     </div>
+
+    <div id="snackbar" class="hide"></div>
+  
 </body>
 
 </html>
