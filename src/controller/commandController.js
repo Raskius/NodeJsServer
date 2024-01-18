@@ -26,17 +26,13 @@ export default class CommandController {
   }
 
   createCommand(req, res) {
-    const commands = this.commandService.findAll();
-    const hasCommand = Command.containsCommand(commands, req.body);
-
-    if (hasCommand) {
-      res.status(400).json({ error: `There is already a command with name: '${req.body.name}'` });
+    const {name, description, examples} = req.body;
+    const command = this.commandService.findByName(name);
+    if(command != undefined){
+      res.status(400).json({ error: `A command with that name already exists: '${name}'` });
       return;
     }
-
-    const newCommand = new Command(req.body.name, req.body.description, req.body.examples);
-    commands.push(newCommand);
-    exportCommands(commands);
+    const newCommand = this.commandService.save(name, description, examples, []);
     res.status(201).json({ message: `Created request '${newCommand}'` });
   }
 
@@ -46,7 +42,6 @@ export default class CommandController {
       res.status(400).json({ error: `Could not find a command with id: '${req.params.id}'` });
       return;
     }
-    console.error(command)
     this.commandService.deleteById(command.id);
     res.status(200).json({ message: `Command '${req.params.id}' successfully deleted.` });
   }

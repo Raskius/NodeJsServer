@@ -21,5 +21,9 @@ export default class CommandService{
         return this.commandRepository.deleteById(id);
     }
 
+    save(name, description, examples, tags){
+        return this.commandRepository.save(name, description, examples, tags)
+    }
+
 
 }

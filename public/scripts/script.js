@@ -82,6 +82,7 @@ async function addCommand(name, description, examples) {
             body: JSON.stringify({ name, description, examples }),
         });
 
+
         // Clone the response before reading the body
         const clonedResponse = response.clone();
 
