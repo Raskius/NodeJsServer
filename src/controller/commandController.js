@@ -34,6 +34,6 @@ export default class CommandController {
             return;
         }
         this.commandService.deleteById(command.getId());
-        res.status(200).json({ message: `Command '${req.params.id}' successfully deleted.` });
+        res.status(200).json({ message: `Command '${command.getName()}' successfully deleted.` });
     }
 }

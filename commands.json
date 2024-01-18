@@ -1,44 +1,44 @@
 [
-    {
-      "id": "28f20e03-cecd-4e46-b082-36f21b00b6d0",
-      "name": "ls",
-      "description": "List information about the FILEs",
-      "examples": [],
-      "tags": []
-    },
-    {
-      "id": "db2acd86-62cf-411c-be47-9e9031abde31",
-      "name": "cd",
-      "description": "Change the shell working directory",
-      "examples": [],
-      "tags": []
-    },
-    {
-      "id": "e832eee7-2152-49c4-a6ca-82ceb2322abc",
-      "name": "grep",
-      "description": "Search for PATTERN in each FILE or standard input",
-      "examples": [],
-      "tags": []
-    },
-    {
-      "id": "a215a294-9878-4045-ac62-40d71702245a",
-      "name": "rm",
-      "description": "Remove (unlink) the FILE(s).",
-      "examples": [],
-      "tags": []
-    },
-    {
-      "id": "f6da4add-35c8-4ebf-8190-8b638e6c0cc9",
-      "name": "cat",
-      "description": "Concatenate FILE(s) to standard output.",
-      "examples": [],
-      "tags": []
-    },
-    {
-      "id": "eddc10c0-8b9e-428e-8a90-a90df5b0f70a",
-      "name": "gpg",
-      "description": "Sign, check, encrypt or decrypt",
-      "examples": [],
-      "tags": []
-    }
-  ]
+  {
+    "id": "28f20e03-cecd-4e46-b082-36f21b00b6d0",
+    "name": "ls",
+    "description": "List information about the FILEs",
+    "examples": [],
+    "tags": []
+  },
+  {
+    "id": "db2acd86-62cf-411c-be47-9e9031abde31",
+    "name": "cd",
+    "description": "Change the shell working directory",
+    "examples": [],
+    "tags": []
+  },
+  {
+    "id": "e832eee7-2152-49c4-a6ca-82ceb2322abc",
+    "name": "grep",
+    "description": "Search for PATTERN in each FILE or standard input",
+    "examples": [],
+    "tags": []
+  },
+  {
+    "id": "a215a294-9878-4045-ac62-40d71702245a",
+    "name": "rm",
+    "description": "Remove (unlink) the FILE(s).",
+    "examples": [],
+    "tags": []
+  },
+  {
+    "id": "f6da4add-35c8-4ebf-8190-8b638e6c0cc9",
+    "name": "cat",
+    "description": "Concatenate FILE(s) to standard output.",
+    "examples": [],
+    "tags": []
+  },
+  {
+    "id": "eddc10c0-8b9e-428e-8a90-a90df5b0f70a",
+    "name": "gpg",
+    "description": "Sign, check, encrypt or decrypt",
+    "examples": [],
+    "tags": []
+  }
+]

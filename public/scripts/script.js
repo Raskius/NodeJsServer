@@ -15,9 +15,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         await addCommand(commandName, commandDescription, commandExamples);
     });
 
-
-    // addOnDeleteCommandHandler();
-
 });
 
 function addOnDeleteCommandHandler(){
@@ -28,8 +25,7 @@ function addOnDeleteCommandHandler(){
 
             if (clickedLi) {
                 const commandId = clickedLi.dataset.commandId;
-                // Your logic here, for example, calling a function with the commandId
-                alert(commandId)
+                // alert(commandId)
                 await deleteCommand(commandId);
             }
         });
@@ -65,6 +61,7 @@ async function fetchCommands() {
 
             const deleteElement = document.createElement('div')
             deleteElement.classList.add('delete-icon')
+            deleteElement.title = `Delete '${command.name}' command`
             deleteElement.innerHTML = `<i class="fa fa-trash" aria-hidden="true"></i>`
 
             // Append elements to the command details container
@@ -80,7 +77,7 @@ async function fetchCommands() {
             commandsList.appendChild(listCommand);
         });
 
-
+        // Create click handler for delete icons
         addOnDeleteCommandHandler();
 
     } catch (error) {
@@ -106,7 +103,6 @@ async function addCommand(name, description, examples) {
 
         if (!response.ok) {
             const errorText = await clonedResponse.text();
-            // console.log(errorText);
             throw new CustomError(`Error adding command: ${response.status} ${response.statusText}\n${errorText}`, response.status, errorText);
         }
         
@@ -114,11 +110,11 @@ async function addCommand(name, description, examples) {
         console.log('Response body:', responseBody);
 
         await fetchCommands(); // Refresh the list after adding a new command
+        showSnackbar(JSON.parse(responseBody).message, false);
     } catch (error) {
         if(error instanceof CustomError){
             console.error(error);
-            console.log(error);
-            showErrorSnackbar(JSON.parse(error.errorText).error);
+            showSnackbar(JSON.parse(error.errorText).error, true);
         }
     }
 }
@@ -133,12 +129,15 @@ async function deleteCommand(commandId) {
         if (!response.ok) {
             throw new Error(`Error deleting command: ${response.status} ${response.statusText}`);
         }
+        const responseBody = await response.text(); // or response.json() if the body is JSON
 
         await fetchCommands(); // Refresh the list after deleting an command
+        
+        showSnackbar(JSON.parse(responseBody).message, false);
     } catch (error) {
         console.error('Error deleting command:', error);
         console.log(error);
-        showErrorSnackbar(JSON.parse(error.errorText).error);
+        showSnackbar(JSON.parse(error.errorText).error, false);
     }
 }
 
@@ -163,10 +162,11 @@ async function deleteCommand(commandId) {
 // }
 
 
-function showErrorSnackbar(text) {
+function showSnackbar(text, isError) {
     const snackbar = document.getElementById('snackbar');
     snackbar.innerText = text;
     snackbar.classList.add('show');
+    snackbar.classList.add(isError ? 'error' : 'success');
 
     setTimeout(() => {
         snackbar.classList.remove('show');
