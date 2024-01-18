@@ -13,6 +13,21 @@ export default class Command{
         return `ID: ${this.id}\nName:\n ${this.name}\nDescription:\n ${this.description} \nExamples:\n ${this.examples}`
     }
 
+    // Exclude ID when exporting
+    toJSON() {
+        const { id, ...rest } = this;
+        return rest;
+    }
+    
+    static serializeArray(commandsArray) {
+        return commandsArray.map(command => command.toJSON());
+    }
+
+    static deserializeArray(jsonString) {
+        const jsonArray = JSON.parse(jsonString);
+        return jsonArray.map(obj => new Command(obj.name, obj.description, obj.examples, obj.tags));
+    }
+
     static containsCommand(commandsArray, command){
         return commandsArray.some(i => i.name === command.name)
     }

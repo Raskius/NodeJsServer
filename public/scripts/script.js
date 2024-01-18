@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         await addCommand(commandName, commandDescription, commandExamples);
     });
 
-    // Delegate click event handling to the commandsList for delete icons
     const commandsList = document.getElementById('commandsList');
     commandsList.addEventListener('click', async (event) => {
         // if (event.target.classList.contains('delete-icon')) {
@@ -23,6 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             await deleteCommand(commandId);
         // }
     });
+
 });
 
 // Fetch commands from the server and display them
@@ -36,13 +36,37 @@ async function fetchCommands() {
         commands.forEach(command => {
             const listCommand = document.createElement('li');
             listCommand.setAttribute('data-command-id', command.id);
-            listCommand.textContent = command.name + "\n" + command.description + "\n" + command.examples;
+
+            // Create a container for the command details
+            const commandDetails = document.createElement('div');
+            commandDetails.classList.add('command-details');
+
+            // Create a larger font size element for the name
+            const nameElement = document.createElement('h4');
+            nameElement.classList.add('command-name');
+            nameElement.textContent = command.name;
+
+            // Create a smaller font size element for the description
+            const descriptionElement = document.createElement('p');
+            descriptionElement.classList.add('command-description');
+            descriptionElement.textContent = command.description;
+
+            // Append elements to the command details container
+            commandDetails.appendChild(nameElement);
+            commandDetails.innerHTML += ' - '; // Add a separator
+            commandDetails.appendChild(descriptionElement);
+
+            // Append the command details container to the list item
+            listCommand.appendChild(commandDetails);
+
+            // Append the list item to the commands list
             commandsList.appendChild(listCommand);
         });
     } catch (error) {
         console.error('Error fetching commands:', error);
     }
 }
+
 
 // Add a new command to the server and update the UI
 async function addCommand(name, description, examples) {

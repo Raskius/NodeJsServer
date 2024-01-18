@@ -1,0 +1,32 @@
+[
+  {
+    "name": "ls",
+    "description": "List information about the FILEs",
+    "examples": [],
+    "tags": []
+  },
+  {
+    "name": "cd",
+    "description": "Change the shell working directory",
+    "examples": [],
+    "tags": []
+  },
+  {
+    "name": "grep",
+    "description": "Search for PATTERN in each FILE or standard input",
+    "examples": [],
+    "tags": []
+  },
+  {
+    "name": "rm",
+    "description": "Remove (unlink) the FILE(s).",
+    "examples": [],
+    "tags": []
+  },
+  {
+    "name": "cat",
+    "description": "Concatenate FILE(s) to standard output.",
+    "examples": [],
+    "tags": []
+  }
+]

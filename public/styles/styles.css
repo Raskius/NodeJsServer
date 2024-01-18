@@ -26,18 +26,22 @@ h1 {
 }
 
 textarea {
-  min-height: 100px;
+  height: 100px;
   resize: vertical; 
 }
 
 .command-section {
   margin-top: 20px;
 }
+
+
 .add-command-section {
   margin-top: 60px;
 }
 
 .command-list {
+  display: flex;
+  flex-direction: column;
   list-style: none;
   padding: 0;
 }
@@ -103,4 +107,21 @@ textarea {
 
 .add-command-btn:hover {
   background-color: #0056b3; /* Darker hover color */
+}
+
+/* Add these styles to combine name and description on the same line */
+.command-details {
+  padding: 10px;
+}
+
+.command-name {
+  font-size: 1.1em; /* Adjust the size as needed */
+  display: inline; /* Make it display inline */
+  margin-bottom: 5px; /* Add spacing between name and description */
+}
+
+.command-description {
+  font-size: .9em; /* Adjust the size as needed */
+  display: inline; /* Make it display inline */
+  margin-left: 5px; /* Add spacing between name and description */
 }

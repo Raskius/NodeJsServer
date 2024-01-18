@@ -1,5 +1,6 @@
 import express from 'express';
 import Command from '../model/command.js';
+import { importCommands, exportCommands } from '../utils/commandUtils.js';
 
 const router = express.Router();
 
@@ -8,8 +9,13 @@ const router = express.Router();
 const command1 = new Command('ls', 'List information about the FILEs', [], [])
 const command2 = new Command('cd', 'Change the shell working directory')
 const command3 = new Command('grep', 'Search for PATTERN in each FILE or standard input')
-let commands = [command1, command2, command3];
+let commandsHardcoded = [command1, command2, command3];
+let commands = importCommands();
+if(commands.length == 0){
+  commands = commandsHardcoded;
+}
 
+exportCommands(commands);
 
 // Get all commands
 router.get('/', (req, res) => {
