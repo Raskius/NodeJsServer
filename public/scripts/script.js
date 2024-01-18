@@ -104,7 +104,7 @@ async function fetchCommands() {
             // Create a smaller font size element for the description
             const descriptionElement = document.createElement('p');
             descriptionElement.classList.add('command-description');
-            descriptionElement.textContent = command.description;
+            descriptionElement.textContent = command.description.length <= 50 ? (command.description) : (command.description.substring(0, 50) + " ...");
 
             const editElement = document.createElement('div')
             editElement.classList.add('edit-icon')
@@ -173,6 +173,7 @@ async function addCommand(name, description, examples) {
         }
     }
 }
+
 // Add a new command to the server and update the UI
 async function editCommand(id, name, description, examples) {
     try {

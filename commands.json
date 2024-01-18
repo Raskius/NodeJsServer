@@ -3,7 +3,7 @@
     "id": "28f20e03-cecd-4e46-b082-36f21b00b6d0",
     "name": "ls",
     "description": "List information about the FILEs",
-    "examples": [],
+    "examples": "# Do something with the files in a directory\n$ ls *.png | while read f; do echo ${f}; done\n$ ls *.png | while read f; do eog ${f}; done\n$ ls *.png | while read -r f; do eog ${f} & ; done   # Open all files at once in the background",
     "tags": []
   },
   {
@@ -45,7 +45,42 @@
     "id": "b4590616-6b75-4726-b923-23b185ec7bd3",
     "name": "chmod",
     "description": "Change the mode of each FILE to MODE.",
+    "examples": "Example 1\nExample 2",
+    "tags": []
+  },
+  {
+    "id": "ae514e5d-9089-4b7f-8268-cb5871ff14bf",
+    "name": "df",
+    "description": "Show information about the file system on which each FILE resides, or all file systems by default.",
+    "examples": "# Show disk space\n$ df -BM -t ext4",
+    "tags": []
+  },
+  {
+    "id": "2df1292d-905a-4f62-89c2-01a07a22b948",
+    "name": "curl",
+    "description": "Usage: curl [options...] <url>\n -d, --data <data>          HTTP POST data\n -f, --fail                 Fail fast with no output on HTTP errors\n -h, --help <category>      Get help for commands\n -i, --include              Include protocol response headers in the output\n -o, --output <file>        Write to file instead of stdout\n -O, --remote-name          Write output to a file named as the remote file\n -s, --silent               Silent mode\n -T, --upload-file <file>   Transfer local FILE to destination\n -u, --user <user:password> Server user and password\n -A, --user-agent <name>    Send User-Agent <name> to server\n -v, --verbose              Make the operation more talkative\n -V, --version              Show version number and quit",
     "examples": "",
+    "tags": []
+  },
+  {
+    "id": "d1ed3511-e63c-40eb-8c34-ffee74e902c3",
+    "name": "find",
+    "description": "Find files",
+    "examples": "# Find files in Documents directory which have the extension (ending in) .sh\n$ find /home/ubuntu/Documents/ -type f -name *.sh\n\n# Cat files found\n$ find /home/ubuntu/Documents/ -type f -name *.sh | xargs -n1 cat\n\n# ls files found\n$ find /home/ubuntu/Documents/ -type f -name *.sh -exec ls -al {} \\;\n\n$ find . -name \"*.png\"\n\n# What is the name of the config file that has been created after 2020-03-03 and is smaller than 28k but larger than 25k?\n$ find / -type f -name *.conf -size +25k -size -28k -newermt 2020-03-03 -exec ls -al {} \\; 2>/dev/null\n\n# Rename all files by removing the character '?'\n$ find . -name \"*.png\" | while read line; do currentName=\"${line}\" && newName=\"$(echo $line | tr -d \"?\")\" && echo \"${currentName} ${newName}\"; done\n$ find . -name \"*.png\" | while read line; do currentName=\"${line}\" && newName=\"$(echo $line | tr -d \"?\")\" && echo \"${currentName} to ${newName}\" && mv \"${currentName}\" \"${newName}\"; done\n\n# Find using regex (all files enging in .png)\n$ find ./ -type f -regex '^\\..*\\.png$'\n$ find ./ -type f -regex '.*\\.png$'\n\n# Posix Extended\n$ find ./ -type f -regextype posix-extended -regex '.*\\.(png|mp4)$'",
+    "tags": []
+  },
+  {
+    "id": "fa21bce8-4783-42cd-aba7-bd17a124de31",
+    "name": "mount",
+    "description": "Mount drives",
+    "examples": "# Mount USB Drive\n$ sudo mkdir /media/USB_Drive    # Create directory first\n$ sudo mount /dev/sdd1 /media/   # Mount to created directory\n$ sudo mount -o umask=000 /dev/sdd1 /media/USB_Drive # Mount with all permissions to all files",
+    "tags": []
+  },
+  {
+    "id": "ec8a02e4-34ac-4bbc-9d37-1d67b08dacb9",
+    "name": "umount",
+    "description": "Unmount drives",
+    "examples": "# Unmount USB Drive\n$ sudo umount /media/USB_Drive   # Unmount\n$ sudo rm -r /media/USB_Drive    # Delete created directory",
     "tags": []
   }
 ]

@@ -55,7 +55,7 @@ export default class CommandController {
 
     const {name, description, examples} = req.body;
     if(command === undefined){
-      res.status(400).json({ error: `A command with that name does not exist: '${name}'` });
+      res.status(400).json({ error: `A command with that id does not exist: '${commandId}'` });
       return;
     }
     const newCommand = this.commandService.edit(commandId, name, description, examples, []);
