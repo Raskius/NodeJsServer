@@ -1,29 +1,20 @@
-
-export default class CommandService{
-
-    constructor(commandRepository){
+export default class CommandService {
+    constructor(commandRepository) {
         this.commandRepository = commandRepository;
     }
-
-    findAll(){
+    findAll() {
         return this.commandRepository.findAll();
     }
-
-    findByName(name){
+    findByName(name) {
         return this.commandRepository.findByName(name);
     }
-
-    findById(id){
+    findById(id) {
         return this.commandRepository.findById(id);
     }
-
-    deleteById(id){
+    deleteById(id) {
         return this.commandRepository.deleteById(id);
     }
-
-    save(name, description, examples, tags){
-        return this.commandRepository.save(name, description, examples, tags)
+    save(name, description, examples, tags) {
+        return this.commandRepository.save(name, description, examples, tags);
     }
-
-
 }
