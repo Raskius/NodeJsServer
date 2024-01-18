@@ -9,10 +9,10 @@ export default class CommandRepository {
         return this.commands;
     }
     findByName(name) {
-        return this.commands.find(c => c.name === name);
+        return this.commands.find(c => c.getName() === name);
     }
     findById(id) {
-        return this.commands.find(c => c.id === id);
+        return this.commands.find(c => c.getId() === id);
     }
     save(name, description, examples, tags) {
         const newCommand = new Command(uuidv4(), name, description, examples, tags);
@@ -21,7 +21,7 @@ export default class CommandRepository {
         return newCommand;
     }
     deleteById(commandId) {
-        this.commands = this.commands.filter(command => command.id !== commandId);
+        this.commands = this.commands.filter(command => command.getId() !== commandId);
         this.saveCommands();
         return this.commands;
     }

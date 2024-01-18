@@ -1,5 +1,5 @@
 import CommandRepository from "../repository/commandRepository";
-
+import Command from "../model/command.js";
 export default class CommandService{
 
     private commandRepository;
@@ -8,15 +8,15 @@ export default class CommandService{
         this.commandRepository = commandRepository;
     }
 
-    findAll(){
+    findAll(): Command[] {
         return this.commandRepository.findAll();
     }
 
-    findByName(name: string){
+    findByName(name: string): Command | undefined {
         return this.commandRepository.findByName(name);
     }
 
-    findById(id: string){
+    findById(id: string): Command | undefined {
         return this.commandRepository.findById(id);
     }
 

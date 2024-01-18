@@ -40,12 +40,5 @@
     "description": "Sign, check, encrypt or decrypt",
     "examples": [],
     "tags": []
-  },
-  {
-    "id": "761c800e-f109-4eee-a111-287613f20596",
-    "name": "rm1",
-    "description": "ss",
-    "examples": "",
-    "tags": []
   }
 ]

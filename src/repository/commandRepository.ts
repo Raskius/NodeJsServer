@@ -14,11 +14,11 @@ export default class CommandRepository {
   }
 
   findByName(name: string): Command | undefined {
-    return this.commands.find(c => c.name === name);
+    return this.commands.find(c => c.getName() === name);
   }
 
   findById(id: string): Command | undefined {
-    return this.commands.find(c => c.id === id);
+    return this.commands.find(c => c.getId() === id);
   }
 
   save(name: string, description: string, examples: string[], tags: string[]): Command {
@@ -29,7 +29,7 @@ export default class CommandRepository {
   }
 
   deleteById(commandId: string): Command[] {
-    this.commands = this.commands.filter(command => command.id !== commandId);
+    this.commands = this.commands.filter(command => command.getId() !== commandId);
     this.saveCommands();
     return this.commands;
   }
