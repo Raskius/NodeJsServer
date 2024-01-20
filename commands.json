@@ -2,7 +2,7 @@
   {
     "id": "28f20e03-cecd-4e46-b082-36f21b00b6d0",
     "name": "ls",
-    "description": "List information about the FILEs",
+    "description": "New information here 2",
     "examples": "# Do something with the files in a directory\n$ ls *.png | while read f; do echo ${f}; done\n$ ls *.png | while read f; do eog ${f}; done\n$ ls *.png | while read -r f; do eog ${f} & ; done   # Open all files at once in the background",
     "tags": []
   },

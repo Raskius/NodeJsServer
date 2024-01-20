@@ -30,10 +30,10 @@ export default class CommandRepository {
         const existingCommandIndex = this.commands.findIndex(command => command.getId() === id);
         // Command with the given ID already exists, update it
         let command = this.commands[existingCommandIndex];
-        command.setName(name);
-        command.setDescription(description);
-        command.setExamples(examples);
-        command.setTags(tags);
+        name !== undefined && command.setName(name);
+        description !== undefined && command.setDescription(description);
+        examples !== undefined && command.setExamples(examples);
+        tags !== undefined && command.setTags(tags);
         this.saveCommands();
         return command;
     }

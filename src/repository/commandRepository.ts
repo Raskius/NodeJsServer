@@ -41,10 +41,10 @@ export default class CommandRepository {
 
     // Command with the given ID already exists, update it
     let command = this.commands[existingCommandIndex];
-    command.setName(name);
-    command.setDescription(description);
-    command.setExamples(examples);
-    command.setTags(tags);
+    name !== undefined && command.setName(name);
+    description !== undefined && command.setDescription(description);
+    examples !== undefined && command.setExamples(examples);
+    tags !== undefined && command.setTags(tags);
 
     this.saveCommands();
     return command;
@@ -56,6 +56,7 @@ export default class CommandRepository {
     return this.commands;
   }
 
+  // Saves commands in 'commands.json' in root directory
   private saveCommands(): void {
     try {
       exportCommands(this.commands);

@@ -58,8 +58,9 @@ export default class CommandController {
       res.status(400).json({ error: `A command with that id does not exist: '${commandId}'` });
       return;
     }
+
     const newCommand = this.commandService.edit(commandId, name, description, examples, []);
     res.status(201).json({ message: `Command '${newCommand.getName()}' updated successfully` });
   }
-
+  
 }
