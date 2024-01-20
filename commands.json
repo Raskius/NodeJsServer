@@ -82,5 +82,19 @@
     "description": "Unmount drives",
     "examples": "# Unmount USB Drive\n$ sudo umount /media/USB_Drive   # Unmount\n$ sudo rm -r /media/USB_Drive    # Delete created directory",
     "tags": []
+  },
+  {
+    "id": "36282856-7756-4c39-8902-2fc82ed80235",
+    "name": "adadasdsd",
+    "description": "asdasd",
+    "examples": "asdasd",
+    "tags": []
+  },
+  {
+    "id": "8e86878e-4699-4401-ba02-08b0ce2fc63f",
+    "name": "asdasdasdasdasd",
+    "description": "adasd",
+    "examples": "asd",
+    "tags": []
   }
 ]

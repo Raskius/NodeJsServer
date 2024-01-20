@@ -9,10 +9,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     const addCommandForm = document.getElementById('addCommandForm');
     addCommandForm.addEventListener('submit', async (event) => {
         event.preventDefault();
-        const commandName = document.getElementById('commandName').value;
-        const commandDescription = document.getElementById('commandDescription').value;
-        const commandExamples = document.getElementById('commandExamples').value;
-        await addCommand(commandName, commandDescription, commandExamples);
+        const commandName = document.getElementById('commandName');
+        const commandDescription = document.getElementById('commandDescription');
+        const commandExamples = document.getElementById('commandExamples');
+        let addSuccessful = await addCommand(commandName.value, commandDescription.value, commandExamples.value);
+        
+        // Clear the input fields
+        if(addSuccessful){
+            commandName.value = "";
+            commandDescription.value = "";
+            commandExamples.value = "";
+        }
     });
 
     // Handle form submission to add a new command
@@ -166,11 +173,15 @@ async function addCommand(name, description, examples) {
 
         await fetchCommands(); // Refresh the list after adding a new command
         showSnackbar(JSON.parse(responseBody).message, false);
+        return true;
     } catch (error) {
+        console.error(error);
         if (error instanceof CustomError) {
-            console.error(error);
             showSnackbar(JSON.parse(error.errorText).error, true);
+        } else {
+            showSnackbar("Unknown error occured", true);
         }
+        return false;
     }
 }
 
