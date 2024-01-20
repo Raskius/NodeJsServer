@@ -42,6 +42,7 @@ export default class CommandRepository {
         this.saveCommands();
         return this.commands;
     }
+    // Saves commands in 'commands.json' in root directory
     saveCommands() {
         try {
             exportCommands(this.commands);

@@ -39,12 +39,12 @@ export default class CommandController {
     editCommand(req, res) {
         let commandId = req.params.id;
         const command = this.commandService.findById(commandId);
-        const { name, description, examples } = req.body;
+        const { name, description, examples, tags } = req.body;
         if (command === undefined) {
             res.status(400).json({ error: `A command with that id does not exist: '${commandId}'` });
             return;
         }
-        const newCommand = this.commandService.edit(commandId, name, description, examples, []);
+        const newCommand = this.commandService.edit(commandId, name, description, examples, tags);
         res.status(201).json({ message: `Command '${newCommand.getName()}' updated successfully` });
     }
 }
