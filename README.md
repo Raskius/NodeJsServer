@@ -29,6 +29,7 @@ node server.js
 | **GET**  (specific command)   | `/commands/:id`    |
 | **POST**    | `/commands`        |
 | **PUT**     | `/commands/:id`    |
+| **PATCH**  | `/commands/:id`    |
 | **DELETE**  | `/commands/:id`    |
 
 <br>
