@@ -56,3 +56,4 @@ export default class Command {
         return commandsArray.some(i => i.name === command.name);
     }
 }
+//# sourceMappingURL=command.js.map

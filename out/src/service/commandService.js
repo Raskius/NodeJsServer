@@ -21,3 +21,4 @@ export default class CommandService {
         return this.commandRepository.edit(commandId, name, description, examples, tags);
     }
 }
+//# sourceMappingURL=commandService.js.map

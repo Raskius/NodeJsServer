@@ -48,3 +48,4 @@ export default class CommandController {
         res.status(201).json({ message: `Command '${newCommand.getName()}' updated successfully` });
     }
 }
+//# sourceMappingURL=commandController.js.map
